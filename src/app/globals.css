@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@layer base {
+     html {
+          scroll-behavior: smooth;
+     }
+
+     body {
+          @apply bg-corporate-light text-corporate-dark antialiased;
+          font-family: 'Inter', system-ui, sans-serif;
+     }
+
+     h1,
+     h2,
+     h3,
+     h4,
+     h5,
+     h6 {
+          @apply font-heading font-semibold tracking-tight;
+     }
+}
+
+@layer components {
+     .container {
+          @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+     }
+
+     .btn {
+          @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-in-out;
+     }
+
+     .btn-primary {
+          @apply bg-corporate-primary text-white hover:bg-corporate-secondary hover:text-white shadow-md hover:shadow-lg;
+     }
+
+     .btn-secondary {
+          @apply bg-transparent text-corporate-primary border-2 border-corporate-primary hover:bg-corporate-primary hover:text-white;
+     }
+
+     .section {
+          @apply py-20 lg:py-32;
+     }
+
+     .section-title {
+          @apply text-3xl md:text-5xl font-heading font-bold text-corporate-primary mb-6;
+     }
+
+     .section-subtitle {
+          @apply text-lg text-corporate-gray max-w-2xl leading-relaxed;
+     }
+
+     .card {
+          @apply bg-white rounded-xl shadow-sm border border-gray-100 p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+     }
+
+     .glass-panel {
+          @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+     }
+
+     .input {
+          @apply w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-corporate-secondary focus:ring-2 focus:ring-corporate-secondary/20 outline-none transition-all;
+     }
+
+     .link {
+          @apply text-corporate-secondary hover:text-corporate-primary underline-offset-4 hover:underline transition-colors;
+     }
+}
+
+@layer utilities {
+     .text-balance {
+          text-wrap: balance;
+     }
+
+     .animate-delay-100 {
+          animation-delay: 100ms;
+     }
+
+     .animate-delay-200 {
+          animation-delay: 200ms;
+     }
+
+     .animate-delay-300 {
+          animation-delay: 300ms;
+     }
+
+     .animate-delay-400 {
+          animation-delay: 400ms;
+     }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+     width: 8px;
+}
+
+::-webkit-scrollbar-track {
+     background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+     background: #c1c1c1;
+     border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+     background: #a1a1a1;
+}
+
+/* Selection color */
+::selection {
+     background: #3b82f6;
+     color: white;
+}
