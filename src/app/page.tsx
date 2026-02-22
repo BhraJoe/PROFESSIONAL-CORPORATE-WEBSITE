@@ -65,8 +65,11 @@ export default function HomePage() {
                     </div>
 
                     {/* Scroll Indicator */}
-                    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-                         <div className="w-[1px] h-24 bg-gradient-to-b from-transparent via-corporate-secondary to-transparent"></div>
+                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce md:bottom-10">
+                         <div className="flex flex-col items-center gap-2">
+                              <div className="w-[2px] h-16 md:h-24 bg-gradient-to-b from-transparent via-corporate-secondary to-transparent"></div>
+                              <span className="text-white/50 text-xs tracking-widest uppercase">Scroll</span>
+                         </div>
                     </div>
                </section>
 
