@@ -58,18 +58,17 @@ export default function Header() {
                     ref={menuRef}
                     className={clsx(
                          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                         // Always white background - for all pages including home on mobile
                          'bg-white shadow-md'
                     )}
                >
                     <div className="container">
-                         <div className="flex items-center justify-between h-16">
+                         <div className="flex items-center justify-between h-14">
                               {/* Logo */}
                               <Link href="/" className="flex items-center gap-2">
-                                   <div className="w-8 h-8 bg-corporate-primary rounded-lg flex items-center justify-center">
-                                        <span className="text-corporate-secondary font-bold text-lg">N</span>
+                                   <div className="w-7 h-7 bg-corporate-primary rounded-lg flex items-center justify-center">
+                                        <span className="text-corporate-secondary font-bold text-base">N</span>
                                    </div>
-                                   <span className="font-heading font-bold text-lg text-corporate-primary">
+                                   <span className="font-heading font-bold text-base text-corporate-primary">
                                         NEXUS
                                    </span>
                               </Link>
@@ -110,29 +109,29 @@ export default function Header() {
                               {/* Mobile Menu Button */}
                               <button
                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                   className="md:hidden p-2 rounded-lg text-corporate-primary hover:bg-gray-100 transition-colors"
+                                   className="md:hidden p-1.5 rounded-lg text-corporate-primary hover:bg-gray-100 transition-colors"
                                    aria-label="Toggle menu"
                               >
-                                   {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                                   {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                               </button>
                          </div>
                     </div>
 
-                    {/* Mobile Menu Dropdown */}
+                    {/* Mobile Menu Dropdown - Compact version */}
                     {isMobileMenuOpen && (
-                         <div className="md:hidden bg-white border-t border-gray-100 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
-                              <div className="container py-3 space-y-1">
+                         <div className="md:hidden bg-white border-t border-gray-100">
+                              <div className="px-4 py-2 space-y-0">
                                    {navigation.map((item) => (
                                         <Link
                                              key={item.name}
                                              href={item.href}
                                              onClick={() => setIsMobileMenuOpen(false)}
-                                             className="block px-4 py-3 text-base font-medium text-corporate-gray hover:text-corporate-primary hover:bg-gray-50 rounded-lg transition-colors"
+                                             className="block px-2 py-2 text-sm font-medium text-corporate-gray hover:text-corporate-primary hover:bg-gray-50 transition-colors"
                                         >
                                              {item.name}
                                         </Link>
                                    ))}
-                                   <div className="pt-2">
+                                   <div className="pt-2 pb-3">
                                         <Link
                                              href="/contact"
                                              onClick={() => setIsMobileMenuOpen(false)}
@@ -147,7 +146,7 @@ export default function Header() {
                </header>
 
                {/* Spacer */}
-               <div className="h-16" />
+               <div className="h-14" />
           </>
      )
 }
