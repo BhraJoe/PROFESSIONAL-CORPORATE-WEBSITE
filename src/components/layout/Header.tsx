@@ -58,36 +58,18 @@ export default function Header() {
                     ref={menuRef}
                     className={clsx(
                          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                         // When at top on home (not scrolled, menu closed): transparent for hero
-                         // When scrolled or menu open: white background
-                         !isScrolled && !isMobileMenuOpen
-                              ? 'bg-transparent'
-                              : 'bg-white shadow-md'
+                         // Always white background - for all pages including home on mobile
+                         'bg-white shadow-md'
                     )}
                >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                          <div className="flex items-center justify-between h-16">
                               {/* Logo */}
                               <Link href="/" className="flex items-center gap-2">
-                                   <div className={clsx(
-                                        'w-8 h-8 rounded-lg flex items-center justify-center transition-colors',
-                                        !isScrolled && !isMobileMenuOpen
-                                             ? 'bg-white/20'
-                                             : 'bg-corporate-primary'
-                                   )}>
-                                        <span className={clsx(
-                                             'font-bold text-lg transition-colors',
-                                             !isScrolled && !isMobileMenuOpen
-                                                  ? 'text-white'
-                                                  : 'text-corporate-secondary'
-                                        )}>N</span>
+                                   <div className="w-8 h-8 bg-corporate-primary rounded-lg flex items-center justify-center">
+                                        <span className="text-corporate-secondary font-bold text-lg">N</span>
                                    </div>
-                                   <span className={clsx(
-                                        'font-heading font-bold text-lg transition-colors',
-                                        !isScrolled && !isMobileMenuOpen
-                                             ? 'text-white'
-                                             : 'text-corporate-primary'
-                                   )}>
+                                   <span className="font-heading font-bold text-lg text-corporate-primary">
                                         NEXUS
                                    </span>
                               </Link>
@@ -100,9 +82,9 @@ export default function Header() {
                                              href={item.href}
                                              className={clsx(
                                                   'text-sm font-medium transition-colors',
-                                                  !isScrolled
-                                                       ? 'text-white/90 hover:text-white'
-                                                       : 'text-corporate-gray hover:text-corporate-primary'
+                                                  isScrolled
+                                                       ? 'text-corporate-gray hover:text-corporate-primary'
+                                                       : 'text-white/90 hover:text-white'
                                              )}
                                         >
                                              {item.name}
@@ -116,9 +98,9 @@ export default function Header() {
                                         href="/contact"
                                         className={clsx(
                                              'inline-flex items-center px-5 py-2 text-sm font-medium rounded-lg transition-colors',
-                                             !isScrolled
-                                                  ? 'text-white border border-white/30 hover:bg-white hover:text-corporate-primary'
-                                                  : 'text-white bg-corporate-primary hover:bg-corporate-secondary'
+                                             isScrolled
+                                                  ? 'text-white bg-corporate-primary hover:bg-corporate-secondary'
+                                                  : 'text-white border border-white/30 hover:bg-white hover:text-corporate-primary'
                                         )}
                                    >
                                         Get Started
@@ -128,12 +110,7 @@ export default function Header() {
                               {/* Mobile Menu Button */}
                               <button
                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                   className={clsx(
-                                        'md:hidden p-2 rounded-lg transition-colors',
-                                        !isScrolled && !isMobileMenuOpen
-                                             ? 'text-white hover:bg-white/10'
-                                             : 'text-corporate-primary hover:bg-gray-100'
-                                   )}
+                                   className="md:hidden p-2 rounded-lg text-corporate-primary hover:bg-gray-100 transition-colors"
                                    aria-label="Toggle menu"
                               >
                                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
