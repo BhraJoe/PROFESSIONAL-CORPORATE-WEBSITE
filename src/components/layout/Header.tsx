@@ -26,6 +26,18 @@ export default function Header() {
           return () => window.removeEventListener('scroll', handleScroll)
      }, [])
 
+     // Prevent body scroll when mobile menu is open
+     useEffect(() => {
+          if (isMobileMenuOpen) {
+               document.body.style.overflow = 'hidden'
+          } else {
+               document.body.style.overflow = 'unset'
+          }
+          return () => {
+               document.body.style.overflow = 'unset'
+          }
+     }, [isMobileMenuOpen])
+
      return (
           <header
                className={clsx(
@@ -100,21 +112,35 @@ export default function Header() {
                               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                          </button>
                     </div>
+               </nav>
 
-                    {/* Mobile Menu */}
-                    <div
-                         className={clsx(
-                              'lg:hidden absolute top-full left-0 right-0 glass-panel border-t border-white/10 transition-all duration-300 overflow-hidden',
-                              isMobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-                         )}
-                    >
-                         <div className="container py-6 space-y-4">
+               {/* Mobile Menu */}
+               <div
+                    className={clsx(
+                         'lg:hidden absolute top-full left-0 right-0 transition-all duration-300 ease-in-out',
+                         isMobileMenuOpen
+                              ? 'opacity-100 translate-y-0'
+                              : 'opacity-0 -translate-y-4 pointer-events-none'
+                    )}
+               >
+                    <div className={clsx(
+                         'border-t shadow-2xl',
+                         isScrolled
+                              ? 'bg-white border-gray-200'
+                              : 'bg-corporate-primary border-white/10'
+                    )}>
+                         <div className="container py-6 space-y-2">
                               {navigation.map((item) => (
                                    <Link
                                         key={item.name}
                                         href={item.href}
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="block py-3 px-4 text-corporate-primary font-medium hover:bg-corporate-light/50 hover:text-corporate-secondary rounded-lg transition-colors border-l-2 border-transparent hover:border-corporate-secondary"
+                                        className={clsx(
+                                             'block py-3 px-4 font-medium rounded-lg transition-all duration-200',
+                                             isScrolled
+                                                  ? 'text-corporate-primary hover:bg-corporate-light hover:text-corporate-secondary'
+                                                  : 'text-white hover:bg-white/10 hover:text-corporate-secondary'
+                                        )}
                                    >
                                         {item.name}
                                    </Link>
@@ -122,13 +148,18 @@ export default function Header() {
                               <Link
                                    href="/contact"
                                    onClick={() => setIsMobileMenuOpen(false)}
-                                   className="block w-full btn btn-primary text-center mt-6"
+                                   className={clsx(
+                                        'block w-full btn text-center mt-6',
+                                        isScrolled
+                                             ? 'btn-primary'
+                                             : 'bg-corporate-secondary text-corporate-primary hover:bg-corporate-accent'
+                                   )}
                               >
                                    Get Started
                               </Link>
                          </div>
                     </div>
-               </nav>
+               </div>
           </header>
      )
 }
