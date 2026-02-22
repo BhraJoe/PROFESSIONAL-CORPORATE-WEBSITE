@@ -51,11 +51,10 @@ export default function Header() {
           <>
                <header
                     className={clsx(
-                         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                         // Always show white background on mobile (below lg), transparent only on lg+ when not scrolled
-                         isScrolled || isMobileMenuOpen || true
-                              ? 'bg-white shadow-lg shadow-black/5 py-3'
-                              : 'lg:bg-transparent py-5'
+                         'fixed top-0 left-0 right-0 z-[100] transition-all duration-300',
+                         // Mobile: always white bg. Desktop: transparent when not scrolled
+                         'bg-white shadow-lg shadow-black/5 py-3',
+                         !isScrolled && 'lg:bg-transparent lg:shadow-none lg:py-5'
                     )}
                >
                     <nav className="container px-4">
@@ -133,7 +132,7 @@ export default function Header() {
                {/* Mobile Full-Screen Menu */}
                <div
                     className={clsx(
-                         'fixed inset-0 z-[60] lg:hidden transition-all duration-500',
+                         'fixed inset-0 z-[90] lg:hidden transition-all duration-500',
                          isMobileMenuOpen
                               ? 'opacity-100 pointer-events-auto'
                               : 'opacity-0 pointer-events-none'
@@ -144,8 +143,6 @@ export default function Header() {
                          {/* Decorative circles */}
                          <div className="absolute top-20 -left-20 w-64 h-64 bg-corporate-secondary/10 rounded-full blur-3xl"></div>
                          <div className="absolute bottom-20 -right-20 w-80 h-80 bg-corporate-secondary/5 rounded-full blur-3xl"></div>
-                         {/* Grid pattern */}
-                         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTAgNDBMMDQgMEgwIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')]"></div>
                     </div>
 
                     {/* Menu Content */}
@@ -162,7 +159,7 @@ export default function Header() {
                               </button>
                          </div>
 
-                         {/* Navigation Links - Large Touch Targets */}
+                         {/* Navigation Links */}
                          <div className="px-4 py-8">
                               <nav className="space-y-3">
                                    {navigation.map((item, index) => {
@@ -172,24 +169,20 @@ export default function Header() {
                                                   key={item.name}
                                                   href={item.href}
                                                   onClick={() => setIsMobileMenuOpen(false)}
-                                                  className={clsx(
-                                                       'flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-500 group',
-                                                       'text-white hover:bg-white/10',
-                                                       isMobileMenuOpen && 'animate-fade-in'
-                                                  )}
+                                                  className="flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-500 text-white hover:bg-white/10"
                                                   style={{
                                                        animationDelay: isMobileMenuOpen ? `${150 + index * 80}ms` : '0ms',
                                                        opacity: isMobileMenuOpen ? 1 : 0,
                                                        transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)'
                                                   }}
                                              >
-                                                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-corporate-secondary group-hover:text-corporate-primary transition-all duration-300">
+                                                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
                                                        <Icon size={24} />
                                                   </div>
                                                   <span className="font-heading font-semibold text-xl">{item.name}</span>
                                                   <ArrowUpRight
                                                        size={20}
-                                                       className="ml-auto text-white/40 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+                                                       className="ml-auto text-white/40"
                                                   />
                                              </Link>
                                         )
@@ -202,16 +195,7 @@ export default function Header() {
                               <Link
                                    href="/contact"
                                    onClick={() => setIsMobileMenuOpen(false)}
-                                   className={clsx(
-                                        'flex items-center justify-center gap-3 w-full py-5 px-6 rounded-2xl font-heading font-semibold text-lg transition-all duration-500',
-                                        'bg-corporate-secondary text-corporate-primary hover:bg-white hover:shadow-2xl',
-                                        isMobileMenuOpen && 'animate-fade-in'
-                                   )}
-                                   style={{
-                                        animationDelay: isMobileMenuOpen ? `${150 + navigation.length * 80}ms` : '0ms',
-                                        opacity: isMobileMenuOpen ? 1 : 0,
-                                        transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)'
-                                   }}
+                                   className="flex items-center justify-center gap-3 w-full py-5 px-6 rounded-2xl font-heading font-semibold text-lg transition-all duration-500 bg-corporate-secondary text-corporate-primary"
                               >
                                    <span>Get Started</span>
                                    <ArrowUpRight size={22} />
@@ -219,20 +203,9 @@ export default function Header() {
                          </div>
 
                          {/* Contact Info */}
-                         <div className="px-6 pb-8">
-                              <div
-                                   className={clsx(
-                                        'space-y-3 text-white/60 text-sm transition-all duration-500',
-                                        isMobileMenuOpen && 'animate-fade-in'
-                                   )}
-                                   style={{
-                                        animationDelay: isMobileMenuOpen ? `${150 + (navigation.length + 1) * 80}ms` : '0ms',
-                                        opacity: isMobileMenuOpen ? 1 : 0,
-                                   }}
-                              >
-                                   <p>contact@nexuscorporate.com</p>
-                                   <p>+1 (555) 123-4567</p>
-                              </div>
+                         <div className="px-6 pb-8 space-y-3 text-white/60 text-sm">
+                              <p>contact@nexuscorporate.com</p>
+                              <p>+1 (555) 123-4567</p>
                          </div>
                     </div>
                </div>
