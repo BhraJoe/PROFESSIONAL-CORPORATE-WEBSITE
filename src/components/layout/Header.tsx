@@ -120,8 +120,8 @@ export default function Header() {
 
                     {/* Mobile Menu Dropdown */}
                     {isMobileMenuOpen && (
-                         <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
-                              <div className="container py-4 space-y-2">
+                         <div className="md:hidden bg-white border-t border-gray-100 shadow-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+                              <div className="container py-3 space-y-1">
                                    {navigation.map((item) => (
                                         <Link
                                              key={item.name}
@@ -132,11 +132,11 @@ export default function Header() {
                                              {item.name}
                                         </Link>
                                    ))}
-                                   <div className="pt-4">
+                                   <div className="pt-2">
                                         <Link
                                              href="/contact"
                                              onClick={() => setIsMobileMenuOpen(false)}
-                                             className="block w-full text-center px-5 py-3 text-base font-medium text-white bg-corporate-primary rounded-lg hover:bg-corporate-secondary transition-colors"
+                                             className="block w-full text-center px-4 py-2 text-sm font-medium text-white bg-corporate-primary rounded-lg hover:bg-corporate-secondary transition-colors"
                                         >
                                              Get Started
                                         </Link>
