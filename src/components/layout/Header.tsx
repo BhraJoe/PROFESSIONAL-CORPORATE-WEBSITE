@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronRight, Home, User, Briefcase, BookOpen, Users, Mail } from 'lucide-react'
+import { Menu, X, Home, User, Briefcase, BookOpen, Users, Mail, ArrowUpRight } from 'lucide-react'
 import { clsx } from 'clsx'
 
 const navigation = [
@@ -52,36 +52,37 @@ export default function Header() {
                <header
                     className={clsx(
                          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                         isScrolled
-                              ? 'bg-white/95 backdrop-blur-md shadow-sm py-3'
-                              : 'bg-transparent py-5'
+                         isScrolled || isMobileMenuOpen
+                              ? 'bg-white shadow-lg shadow-black/5'
+                              : 'bg-transparent'
                     )}
+                    style={{ paddingTop: '12px', paddingBottom: '12px' }}
                >
-                    <nav className="container">
+                    <nav className="container px-4">
                          <div className="flex items-center justify-between">
                               {/* Logo */}
                               <Link href="/" className="flex items-center gap-2 group">
                                    <div className={clsx(
-                                        'w-10 h-10 rounded-tr-xl rounded-bl-xl border flex items-center justify-center transition-all duration-300 group-hover:scale-105',
-                                        isScrolled
-                                             ? 'bg-corporate-primary border-corporate-secondary/20'
-                                             : 'bg-white/10 backdrop-blur-sm border-white/20'
+                                        'w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105',
+                                        isScrolled || isMobileMenuOpen
+                                             ? 'bg-corporate-primary'
+                                             : 'bg-white/20 backdrop-blur-sm'
                                    )}>
                                         <span className={clsx(
-                                             'font-heading font-bold text-2xl',
-                                             isScrolled ? 'text-corporate-secondary' : 'text-white'
+                                             'font-heading font-bold text-xl',
+                                             isScrolled || isMobileMenuOpen ? 'text-corporate-secondary' : 'text-white'
                                         )}>N</span>
                                    </div>
                                    <div className="flex flex-col">
                                         <span className={clsx(
-                                             'font-heading font-bold text-xl leading-none transition-colors',
-                                             isScrolled ? 'text-corporate-primary' : 'text-white'
+                                             'font-heading font-bold text-lg md:text-xl leading-none transition-colors',
+                                             isScrolled || isMobileMenuOpen ? 'text-corporate-primary' : 'text-white'
                                         )}>
                                              NEXUS
                                         </span>
                                         <span className={clsx(
-                                             'text-[0.65rem] tracking-[0.2em] font-medium transition-colors uppercase',
-                                             isScrolled ? 'text-corporate-secondary' : 'text-white/80'
+                                             'text-[0.55rem] md:text-[0.65rem] tracking-[0.15em] md:tracking-[0.2em] font-medium transition-colors uppercase',
+                                             isScrolled || isMobileMenuOpen ? 'text-corporate-secondary' : 'text-white/70'
                                         )}>
                                              Corporate
                                         </span>
@@ -112,7 +113,7 @@ export default function Header() {
                                         className={clsx(
                                              'btn px-6 py-2.5 text-sm font-medium rounded-full transition-all duration-300',
                                              isScrolled
-                                                  ? 'btn-primary shadow-lg shadow-corporate-primary/25 hover:shadow-xl hover:scale-105'
+                                                  ? 'btn-primary'
                                                   : 'bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white hover:text-corporate-primary'
                                         )}
                                    >
@@ -124,20 +125,31 @@ export default function Header() {
                               <button
                                    onClick={() => setIsMobileMenuOpen(true)}
                                    className={clsx(
-                                        'lg:hidden p-2.5 rounded-full transition-all duration-300',
-                                        isScrolled
-                                             ? 'text-corporate-primary hover:bg-corporate-primary/5'
-                                             : 'text-white hover:bg-white/10'
+                                        'lg:hidden p-2 rounded-lg transition-all duration-300 flex flex-col gap-1.5',
+                                        isScrolled || isMobileMenuOpen
+                                             ? 'text-corporate-primary'
+                                             : 'text-white'
                                    )}
                                    aria-label="Open menu"
                               >
-                                   <Menu size={24} strokeWidth={2} />
+                                   <span className={clsx(
+                                        'w-6 h-0.5 bg-current transition-all duration-300',
+                                        isMobileMenuOpen && 'rotate-45 translate-y-2'
+                                   )} />
+                                   <span className={clsx(
+                                        'w-6 h-0.5 bg-current transition-all duration-300',
+                                        isMobileMenuOpen && 'opacity-0'
+                                   )} />
+                                   <span className={clsx(
+                                        'w-6 h-0.5 bg-current transition-all duration-300',
+                                        isMobileMenuOpen && '-rotate-45 -translate-y-2'
+                                   )} />
                               </button>
                          </div>
                     </nav>
                </header>
 
-               {/* Mobile Menu Overlay */}
+               {/* Mobile Full-Screen Menu */}
                <div
                     className={clsx(
                          'fixed inset-0 z-[60] lg:hidden transition-all duration-500',
@@ -146,87 +158,106 @@ export default function Header() {
                               : 'opacity-0 pointer-events-none'
                     )}
                >
-                    {/* Backdrop */}
-                    <div
-                         className={clsx(
-                              'absolute inset-0 bg-corporate-primary/60 backdrop-blur-sm transition-opacity duration-300',
-                              isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
-                         )}
-                         onClick={() => setIsMobileMenuOpen(false)}
-                    />
+                    {/* Animated Background */}
+                    <div className="absolute inset-0 bg-corporate-primary">
+                         {/* Decorative circles */}
+                         <div className="absolute top-20 -left-20 w-64 h-64 bg-corporate-secondary/10 rounded-full blur-3xl"></div>
+                         <div className="absolute bottom-20 -right-20 w-80 h-80 bg-corporate-secondary/5 rounded-full blur-3xl"></div>
+                         {/* Grid pattern */}
+                         <div className="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTTAgNDBMMDQgMEgwIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')]"></div>
+                    </div>
 
-                    {/* Menu Panel */}
-                    <div
-                         className={clsx(
-                              'absolute top-0 right-0 h-full w-[320px] max-w-[85vw] bg-white shadow-2xl transition-transform duration-500 ease-out',
-                              isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-                         )}
-                    >
+                    {/* Menu Content */}
+                    <div className="relative z-10 h-full overflow-y-auto">
                          {/* Menu Header */}
-                         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
-                              <span className="font-heading font-bold text-lg text-corporate-primary">Menu</span>
+                         <div className="flex items-center justify-between px-6 py-5">
+                              <span className="font-heading font-bold text-xl text-white">NEXUS</span>
                               <button
                                    onClick={() => setIsMobileMenuOpen(false)}
-                                   className="p-2 rounded-full text-corporate-gray hover:bg-gray-100 transition-colors"
+                                   className="p-3 rounded-full text-white/80 hover:bg-white/10 transition-colors"
                                    aria-label="Close menu"
                               >
-                                   <X size={22} strokeWidth={2} />
+                                   <X size={28} strokeWidth={2} />
                               </button>
                          </div>
 
-                         {/* Menu Content */}
-                         <div className="flex flex-col h-full overflow-y-auto">
-                              <div className="flex-1 px-4 py-6">
-                                   {/* Navigation Links */}
-                                   <nav className="space-y-2">
-                                        {navigation.map((item, index) => {
-                                             const Icon = item.icon
-                                             return (
-                                                  <Link
-                                                       key={item.name}
-                                                       href={item.href}
-                                                       onClick={() => setIsMobileMenuOpen(false)}
-                                                       className={clsx(
-                                                            'flex items-center gap-4 px-4 py-4 rounded-xl transition-all duration-300 group',
-                                                            'text-corporate-gray hover:bg-corporate-primary hover:text-white',
-                                                            isMobileMenuOpen && 'animate-slide-in'
-                                                       )}
-                                                       style={{
-                                                            animationDelay: isMobileMenuOpen ? `${index * 75}ms` : '0ms',
-                                                            opacity: isMobileMenuOpen ? 1 : 0,
-                                                            transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(20px)'
-                                                       }}
-                                                  >
-                                                       <Icon size={20} className="transition-transform duration-300 group-hover:scale-110" />
-                                                       <span className="font-medium text-base">{item.name}</span>
-                                                       <ChevronRight
-                                                            size={18}
-                                                            className="ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                                                       />
-                                                  </Link>
-                                             )
-                                        })}
-                                   </nav>
-                              </div>
+                         {/* Navigation Links - Large Touch Targets */}
+                         <div className="px-4 py-8">
+                              <nav className="space-y-3">
+                                   {navigation.map((item, index) => {
+                                        const Icon = item.icon
+                                        return (
+                                             <Link
+                                                  key={item.name}
+                                                  href={item.href}
+                                                  onClick={() => setIsMobileMenuOpen(false)}
+                                                  className={clsx(
+                                                       'flex items-center gap-5 px-6 py-5 rounded-2xl transition-all duration-500 group',
+                                                       'text-white hover:bg-white/10',
+                                                       isMobileMenuOpen && 'animate-fade-in'
+                                                  )}
+                                                  style={{
+                                                       animationDelay: isMobileMenuOpen ? `${150 + index * 80}ms` : '0ms',
+                                                       opacity: isMobileMenuOpen ? 1 : 0,
+                                                       transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)'
+                                                  }}
+                                             >
+                                                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-corporate-secondary group-hover:text-corporate-primary transition-all duration-300">
+                                                       <Icon size={24} />
+                                                  </div>
+                                                  <span className="font-heading font-semibold text-xl">{item.name}</span>
+                                                  <ArrowUpRight
+                                                       size={20}
+                                                       className="ml-auto text-white/40 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+                                                  />
+                                             </Link>
+                                        )
+                                   })}
+                              </nav>
+                         </div>
 
-                              {/* Menu Footer */}
-                              <div className="px-6 py-6 border-t border-gray-100 bg-gray-50">
-                                   <p className="text-sm text-corporate-gray mb-4">Ready to get started?</p>
-                                   <Link
-                                        href="/contact"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="flex items-center justify-center gap-2 w-full py-4 px-6 bg-corporate-primary text-white rounded-xl font-medium transition-all duration-300 hover:bg-corporate-secondary hover:shadow-lg hover:shadow-corporate-secondary/25"
-                                   >
-                                        <span>Get Started</span>
-                                        <ChevronRight size={18} />
-                                   </Link>
+                         {/* CTA Button */}
+                         <div className="px-6 pb-12">
+                              <Link
+                                   href="/contact"
+                                   onClick={() => setIsMobileMenuOpen(false)}
+                                   className={clsx(
+                                        'flex items-center justify-center gap-3 w-full py-5 px-6 rounded-2xl font-heading font-semibold text-lg transition-all duration-500',
+                                        'bg-corporate-secondary text-corporate-primary hover:bg-white hover:shadow-2xl',
+                                        isMobileMenuOpen && 'animate-fade-in'
+                                   )}
+                                   style={{
+                                        animationDelay: isMobileMenuOpen ? `${150 + navigation.length * 80}ms` : '0ms',
+                                        opacity: isMobileMenuOpen ? 1 : 0,
+                                        transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(20px)'
+                                   }}
+                              >
+                                   <span>Get Started</span>
+                                   <ArrowUpRight size={22} />
+                              </Link>
+                         </div>
+
+                         {/* Contact Info */}
+                         <div className="px-6 pb-8">
+                              <div
+                                   className={clsx(
+                                        'space-y-3 text-white/60 text-sm transition-all duration-500',
+                                        isMobileMenuOpen && 'animate-fade-in'
+                                   )}
+                                   style={{
+                                        animationDelay: isMobileMenuOpen ? `${150 + (navigation.length + 1) * 80}ms` : '0ms',
+                                        opacity: isMobileMenuOpen ? 1 : 0,
+                                   }}
+                              >
+                                   <p>contact@nexuscorporate.com</p>
+                                   <p>+1 (555) 123-4567</p>
                               </div>
                          </div>
                     </div>
                </div>
 
                {/* Spacer for fixed header */}
-               <div className="h-[72px] lg:h-[88px]" />
+               <div className="h-[60px] lg:h-[88px]" />
           </>
      )
 }
