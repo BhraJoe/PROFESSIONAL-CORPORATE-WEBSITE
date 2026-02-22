@@ -52,38 +52,24 @@ export default function Header() {
                <header
                     className={clsx(
                          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-                         isScrolled || isMobileMenuOpen
-                              ? 'bg-white shadow-lg shadow-black/5'
-                              : 'bg-transparent'
+                         // Always show white background on mobile (below lg), transparent only on lg+ when not scrolled
+                         isScrolled || isMobileMenuOpen || true
+                              ? 'bg-white shadow-lg shadow-black/5 py-3'
+                              : 'lg:bg-transparent py-5'
                     )}
-                    style={{ paddingTop: '12px', paddingBottom: '12px' }}
                >
                     <nav className="container px-4">
                          <div className="flex items-center justify-between">
                               {/* Logo */}
                               <Link href="/" className="flex items-center gap-2 group">
-                                   <div className={clsx(
-                                        'w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105',
-                                        isScrolled || isMobileMenuOpen
-                                             ? 'bg-corporate-primary'
-                                             : 'bg-white/20 backdrop-blur-sm'
-                                   )}>
-                                        <span className={clsx(
-                                             'font-heading font-bold text-xl',
-                                             isScrolled || isMobileMenuOpen ? 'text-corporate-secondary' : 'text-white'
-                                        )}>N</span>
+                                   <div className="w-9 h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105 bg-corporate-primary">
+                                        <span className="font-heading font-bold text-xl text-corporate-secondary">N</span>
                                    </div>
                                    <div className="flex flex-col">
-                                        <span className={clsx(
-                                             'font-heading font-bold text-lg md:text-xl leading-none transition-colors',
-                                             isScrolled || isMobileMenuOpen ? 'text-corporate-primary' : 'text-white'
-                                        )}>
+                                        <span className="font-heading font-bold text-lg md:text-xl leading-none text-corporate-primary">
                                              NEXUS
                                         </span>
-                                        <span className={clsx(
-                                             'text-[0.55rem] md:text-[0.65rem] tracking-[0.15em] md:tracking-[0.2em] font-medium transition-colors uppercase',
-                                             isScrolled || isMobileMenuOpen ? 'text-corporate-secondary' : 'text-white/70'
-                                        )}>
+                                        <span className="text-[0.55rem] md:text-[0.65rem] tracking-[0.15em] md:tracking-[0.2em] font-medium text-corporate-secondary uppercase">
                                              Corporate
                                         </span>
                                    </div>
@@ -124,12 +110,7 @@ export default function Header() {
                               {/* Mobile Menu Button */}
                               <button
                                    onClick={() => setIsMobileMenuOpen(true)}
-                                   className={clsx(
-                                        'lg:hidden p-2 rounded-lg transition-all duration-300 flex flex-col gap-1.5',
-                                        isScrolled || isMobileMenuOpen
-                                             ? 'text-corporate-primary'
-                                             : 'text-white'
-                                   )}
+                                   className="lg:hidden p-2 rounded-lg transition-all duration-300 flex flex-col gap-1.5 text-corporate-primary"
                                    aria-label="Open menu"
                               >
                                    <span className={clsx(
