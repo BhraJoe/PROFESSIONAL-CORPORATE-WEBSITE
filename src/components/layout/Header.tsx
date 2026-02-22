@@ -62,7 +62,7 @@ export default function Header() {
                          'bg-white shadow-md'
                     )}
                >
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="container">
                          <div className="flex items-center justify-between h-16">
                               {/* Logo */}
                               <Link href="/" className="flex items-center gap-2">
@@ -121,7 +121,7 @@ export default function Header() {
                     {/* Mobile Menu Dropdown */}
                     {isMobileMenuOpen && (
                          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
-                              <div className="px-4 py-4 space-y-2">
+                              <div className="container py-4 space-y-2">
                                    {navigation.map((item) => (
                                         <Link
                                              key={item.name}
