@@ -62,7 +62,7 @@ export default function Header() {
                     )}
                >
                     <div className="container">
-                         <div className="flex items-center justify-between h-14">
+                         <div className="flex items-center justify-between h-12">
                               {/* Logo */}
                               <Link href="/" className="flex items-center gap-2">
                                    <div className="w-7 h-7 bg-corporate-primary rounded-lg flex items-center justify-center">
@@ -146,7 +146,7 @@ export default function Header() {
                </header>
 
                {/* Spacer */}
-               <div className="h-14" />
+               <div className="h-12" />
           </>
      )
 }

@@ -27,7 +27,7 @@ export default function HomePage() {
      return (
           <>
                {/* Hero Section - Using about page style */}
-               <section className="relative pt-28 pb-16 md:pt-32 md:pb-20 bg-corporate-dark overflow-hidden">
+               <section className="relative pt-24 pb-12 md:pt-28 md:pb-16 bg-corporate-dark overflow-hidden">
                     {/* Background Image */}
                     <div className="absolute inset-0 opacity-40">
                          <Image
