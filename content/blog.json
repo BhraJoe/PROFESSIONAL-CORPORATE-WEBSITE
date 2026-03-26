@@ -1,0 +1,20 @@
+[
+     {
+          "slug": "the-future-of-enterprise-architecture",
+          "title": "The Future of Enterprise Architecture",
+          "date": "2026-03-01",
+          "excerpt": "Discover how modern businesses are scaling their tech stacks with composable architecture.",
+          "content": "Enterprise architecture has evolved rapidly in the last five years. Gone are the days of monolithic systems that take months to update. In 2026, companies are leveraging microservices, headless CMS, and edge computing to deliver content globally in milliseconds.",
+          "coverImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200",
+          "author": "Jane Doe"
+     },
+     {
+          "slug": "optimizing-core-web-vitals",
+          "title": "Optimizing Core Web Vitals for Maximum SEO ROI",
+          "date": "2026-02-15",
+          "excerpt": "A deep dive into why LCP, FID, and CLS matter, and how to master them.",
+          "content": "If your site isn't fast, your customers won't stay. Core Web Vitals are more than just a ranking factor; they are a direct indicator of user experience. This article covers practical steps to reduce load times, optimize images, and eliminate layout shifts.",
+          "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+          "author": "John Smith"
+     }
+]

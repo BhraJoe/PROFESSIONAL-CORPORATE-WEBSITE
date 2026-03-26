@@ -1,0 +1,24 @@
+[
+     {
+          "slug": "global-fintech-transformation",
+          "title": "Global FinTech Transformation",
+          "client": "NexFinance Group",
+          "summary": "We migrated NexFinance from a legacy monolith to a globally distributed modern stack, reducing latency by 80%.",
+          "results": [
+               "80% reduction in API response time",
+               "Zero downtime during migration",
+               "150% increase in mobile conversions"
+          ]
+     },
+     {
+          "slug": "ecommerce-scale-up",
+          "title": "E-Commerce Scale-up for Black Friday",
+          "client": "RetailNova",
+          "summary": "Re-engineered RetailNova's frontend to handle 100k concurrent users seamlessly during the holiday rush.",
+          "results": [
+               "Handled 100,000 concurrent users",
+               "Achieved perfect Lighthouse performance score (100/100)",
+               "200% ROI in the first quarter"
+          ]
+     }
+]
